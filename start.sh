@@ -62,8 +62,8 @@ if [[ -f "${venv_dir}" ]]
         
         	if ! [[ -f "${db}" ]]
         	    then
-        	        python ./init_db.py
+        	        python init_db.py
 	    fi
         
-    	    python ./$main_file
+    	    python $main_file
 fi
