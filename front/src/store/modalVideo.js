@@ -1,12 +1,11 @@
 import {makeAutoObservable} from "mobx";
-import {test_data_subs} from "../utils/testData";
 
 
-class ModalStore {
+class ModalVideoStore {
 
     isOpen = false
     isLoad = false
-    data= process.env.NODE_ENV !== 'production' ? test_data_subs : {}
+    data= {}
 
     constructor() {
         makeAutoObservable(this)
@@ -17,7 +16,7 @@ class ModalStore {
     }
 
     load() {
-        this.isLoad = process.env.NODE_ENV === 'production'
+        this.isLoad = true
     }
 
     complete() {
@@ -33,4 +32,4 @@ class ModalStore {
     }
 }
 
-export default new ModalStore()
+export default new ModalVideoStore()

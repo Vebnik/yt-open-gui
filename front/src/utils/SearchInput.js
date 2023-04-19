@@ -9,23 +9,19 @@ import Page from "../store/page";
 import EelApi from '../service/eelApi'
 import ContentStore from "../store/content";
 import Content from "../store/content";
-import Modal from "../store/modal";
+import Modal from "../store/modalChannel";
 
 export const SearchInput = observer(() => {
 
     const [title, setTitle] = useState('')
     const [limit, setLimit] = useState(10)
+    const perPage = [10, 20, 30, 40, 50, 100]
 
     const search = () => {
-
-        if (process.env.NODE_ENV === 'development')
-            ContentStore.newContent([...test_data_video, ...test_data_video])
-
-        if (process.env.NODE_ENV === 'production')
-            EelApi.searchVideo({limit, title}).then(res => {
-                console.log(res)
-                ContentStore.newContent(res)
-            })
+        EelApi.searchVideo({limit, title}).then(res => {
+            console.log(res)
+            ContentStore.newContent(res)
+        })
     }
 
     return (
@@ -33,7 +29,7 @@ export const SearchInput = observer(() => {
             <Box maxW={'500px'} minW={'50%'} display={'flex'} flexDirection={'row'} gap={1} m={'auto'}>
 
                 <Select onChange={ev => setLimit(ev.target.value)} title={'sum results'} width={'120px'} variant='filled'>
-                    {[10, 20, 30, 40, 50, 100].map(el => <option key={el} value={el}>{el}</option>)}
+                    {perPage.map(el => <option key={el} value={el}>{el}</option>)}
                 </Select>
 
                 <Input onChange={ev => setTitle(ev.target.value)}

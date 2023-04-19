@@ -1,22 +1,27 @@
 
 import React from 'react';
 
-import {IconButton, Card, Image, Box, Text, Wrap, useDisclosure} from '@chakra-ui/react';
-import { PlusSquareIcon, CopyIcon, ExternalLinkIcon } from "@chakra-ui/icons";
+import {IconButton, Card, Image, Box, Text, Wrap, useDisclosure, useToast} from '@chakra-ui/react';
+import { PlusSquareIcon, QuestionOutlineIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import {observer} from "mobx-react-lite";
 
 import eelApi from "../../../service/eelApi";
 
-import ModalStore from "../../../store/modal";
+import ModalStore from "../../../store/modalChannel";
+import ModalVideo from "../../../store/modalVideo";
 import Page from "../../../store/page";
+import {ErrorToast} from "../../../utils/Toast";
+import modalVideo from "../../../store/modalVideo";
 
 export const VideoItem = observer(({data}) => {
 
+    const toast= useToast()
+
     const play = () => {
         console.log('try to start mpv')
-        eelApi.mpvPlay(data.id).then(res => {
-            console.log(res)
-        })
+        eelApi.mpvPlay(data.id)
+            .then(res => {console.log(res)})
+            .catch(err => ErrorToast(toast, String(err)))
     }
 
     const openChannelModal = () => {
@@ -26,6 +31,17 @@ export const VideoItem = observer(({data}) => {
         eelApi.getChannelInfo(data.id).then(data => {
             ModalStore.setData(data)
             ModalStore.complete()
+        })
+    }
+
+    const openVideoInfoModal = () => {
+        ModalVideo.load()
+        ModalVideo.open()
+
+        eelApi.getVideoInfo(data.id).then(data => {
+            console.log(data)
+            modalVideo.setData(data)
+            modalVideo.complete()
         })
     }
 
@@ -40,9 +56,9 @@ export const VideoItem = observer(({data}) => {
                     {data.title}
                 </Text>
                 <Wrap/>
-                <IconButton onClick={() => play()} color={'blue.300'} title={'Play'} size={'sm'} background={'none'} icon={<PlusSquareIcon/>}/>
-                <IconButton color={'red.300'} title={'Copy link'} size={'sm'} background={'none'} icon={<CopyIcon/>}/>
-                <IconButton hidden={Page.currentPage === 'channel'} onClick={() => openChannelModal()} color={'red.300'} title={'Get channel info'} size={'sm'} background={'none'} icon={<ExternalLinkIcon/>}/>
+                <IconButton onClick={play} color={'blue.300'} title={'Play'} size={'sm'} background={'none'} icon={<PlusSquareIcon/>}/>
+                <IconButton onClick={openVideoInfoModal} color={'red.300'} title={'Video info'} size={'sm'} background={'none'} icon={<QuestionOutlineIcon/>}/>
+                <IconButton onClick={openChannelModal} hidden={Page.currentPage === 'channel'} color={'red.300'} title={'Get channel info'} size={'sm'} background={'none'} icon={<ExternalLinkIcon/>}/>
             </Box>
         </Card>
     );

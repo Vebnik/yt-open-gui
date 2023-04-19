@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import {observer} from "mobx-react-lite";
 
-import ModalStore from "../../../store/modal";
+import ModalStore from "../../../store/modalChannel";
 import EelApi from "../../../service/eelApi";
 import {ErrorToast, SubsToast} from "../../../utils/Toast";
 

@@ -100,3 +100,19 @@ class YtDlp:
                 })
 
         return tmp_data
+
+    @classmethod
+    def get_video_details(cls, query: str) -> dict:
+        video_raw_info = cls.ydl.extract_info(f"{query}", download=False)
+
+        return {
+            'id': video_raw_info.get('id', 0),
+            'description': video_raw_info.get('description', ''),
+            'uploader': video_raw_info.get('uploader', ''),
+            'channel_url': video_raw_info.get('channel_url', ''),
+            'duration': video_raw_info.get('duration', 0),
+            'view_count': video_raw_info.get('view_count', 0),
+            'categories': video_raw_info.get('categories', [None]),
+            'like_count': video_raw_info.get('like_count', 0),
+            'channel_follower_count': video_raw_info.get('channel_follower_count', 0),
+        }

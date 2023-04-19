@@ -29,7 +29,11 @@ fi
 if ! [[ -d "${build_dir}" ]]
     then
         printf "build not exist -> building\n"
-        source ./build.sh && cd ..
+        if source ./build.sh && cd ..
+            then
+                printf "build success\n"
+            else
+                exit
 fi
 
 

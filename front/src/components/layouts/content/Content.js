@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import ContentStore from "../../../store/content";
 import Page from "../../../store/page";
 import { ModalChannel } from "./ModalChannel";
+import { ModalVideo } from "./ModalVideo";
 
 export const Content = observer(() => {
 
@@ -15,6 +16,7 @@ export const Content = observer(() => {
         return (
             <SimpleGrid minChildWidth='260px' gap={2} rounded={2} >
                 <ModalChannel/>
+                <ModalVideo/>
                 {ContentStore.currentContent.map(el => <VideoItem data={el} key={el.id} />)}
             </SimpleGrid>
         )

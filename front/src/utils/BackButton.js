@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from "../store/page";
 import Content from "../store/content";
-import Modal from "../store/modal";
+import Modal from "../store/modalChannel";
 import EelApi from "../service/eelApi";
 import {Box, IconButton} from "@chakra-ui/react";
 import {ArrowBackIcon} from "@chakra-ui/icons";

@@ -69,3 +69,7 @@ class EelApp:
         @eel.expose
         def delete_subs(channel_id: str) -> None:
             self.db.remove_subs(channel_id)
+
+        @eel.expose
+        def get_video_info(video_id: str) -> dict:
+            return YtDlp.get_video_details(video_id)

@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 
 import Page from "../../store/page";
 import Content from "../../store/content";
-import Modal from "../../store/modal";
+import Modal from "../../store/modalChannel";
 import EelApi from "../../service/eelApi";
 
 export const NavBar = observer(() => {
@@ -21,9 +21,6 @@ export const NavBar = observer(() => {
         }
 
         if (page === 'subs') {
-            if (process.env.NODE_ENV === 'development')
-                Content.newContent([Modal.data])
-
             EelApi.getSubs()
                 .then(data => Content.newContent(data || []))
                 .catch(err => console.log(err))
