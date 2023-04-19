@@ -10,14 +10,14 @@ chromium_dir="/usr/bin/chromium"
 db="db.sqlite3"
 
 
-# check dependency
+printf "check dependency\n"
 if ! source ./dependency.sh
     then
         exit
 fi
 
 
-# rebuild
+printf "check dependency\n"
 if [[ $1 = "rebuild" ]]
     then
         printf "rebuilding ...\n"
@@ -25,7 +25,7 @@ if [[ $1 = "rebuild" ]]
 fi
 
 
-# check build and building
+printf "check build and building\n"
 if ! [[ -d "${build_dir}" ]]
     then
         printf "build not exist -> building\n"
@@ -38,7 +38,7 @@ if ! [[ -d "${build_dir}" ]]
 fi
 
 
-# check venv \ db and start app
+printf "check venv \ db and start app\n"
 if [[ -f "${venv_dir}" ]] 
     then
         	printf "venv exist -> activate and start app\n"
@@ -48,10 +48,10 @@ if [[ -f "${venv_dir}" ]]
         
         if ! [[ -f "${db}" ]]
         	    then
-        	        python ./init_db.py
+        	        python init_db.py
         fi
         
-        python ./$main_file 
+        python $main_file 
     else
         printf "venv and db not exist -> creating\n"
         
