@@ -32,6 +32,7 @@ export const Content = observer(() => {
     if (Page.currentPage === 'channel')
         return (
             <SimpleGrid minChildWidth='260px' gap={2} rounded={2} >
+                <ModalVideo/>
                 {ContentStore.currentContent.map(el => <VideoItem data={el} key={el.id} />)}
             </SimpleGrid>
         )
