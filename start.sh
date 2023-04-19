@@ -34,6 +34,7 @@ if ! [[ -d "${build_dir}" ]]
                 printf "build success\n"
             else
                 exit
+        fi
 fi
 
 
