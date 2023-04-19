@@ -21,7 +21,7 @@ printf "check dependency\n"
 if [[ $1 = "rebuild" ]]
     then
         printf "rebuilding ...\n"
-        source ./build.sh
+        source ./build.sh && cd ..
 fi
 
 
@@ -31,6 +31,7 @@ if ! [[ -d "${build_dir}" ]]
         printf "build not exist -> building\n"
         if source ./build.sh
             then
+                cd ..
                 printf "build success\n"
             else
                 exit
