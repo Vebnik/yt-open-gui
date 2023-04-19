@@ -6,7 +6,7 @@ venv_dir="./back/venv/bin/activate"
 node_dir="./front/node_modules"
 main_file="main.py"
 
-if [[ $node_dir ]]
+if [[ -d $node_dir ]]
     then
     	printf "start building ...\n"
     	

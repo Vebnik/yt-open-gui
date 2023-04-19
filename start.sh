@@ -21,7 +21,7 @@ fi
 if [[ $1 = "rebuild" ]]
     then
         printf "rebuilding ...\n"
-        source ./build.sh && cd ..
+        source ./build.sh
 fi
 
 
@@ -29,7 +29,7 @@ fi
 if ! [[ -d "${build_dir}" ]]
     then
         printf "build not exist -> building\n"
-        if source ./build.sh && cd ..
+        if source ./build.sh
             then
                 printf "build success\n"
             else
